@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -38,6 +38,9 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+# INTRO
+print("\n\n========= WELCOME TO ROOM CRAWLER (TM) =========\n\n")
+player = Player(input("What is your name, brave adventurer? "), "outside")
 
 # Write a loop that:
 #
@@ -52,11 +55,11 @@ room['treasure'].s_to = room['narrow']
 
 
 active = True
-current_room = "outside"
 
 while active is True:
-    print("\n\n========= WELCOME TO ROOM CRAWLER (TM) =========\n\n")
-    print(f"Current location: {room[current_room].name}")
+    # Destructuring values
+    current_room = player.current_room[0]
+    print(f"Current location: {current_room}")
     print(f"Description: {room[current_room].description}\n")
 
     command = input("\nPlease provide a command to get the adventure started: ")

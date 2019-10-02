@@ -18,7 +18,7 @@ class Room:
     self.w_to = w_to,
 
   def __str__(self):
-    return f"Room: {self.name}, n_to: {self.n_to}"
+    return f"Room: {self.name[0]}, n_to: {self.n_to[0]}"
 
-# test = Room("Foyer", "It's big")
+# test = Room("Foyer", "It's big", "north", "south")
 # print(test)
