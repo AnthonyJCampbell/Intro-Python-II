@@ -40,8 +40,8 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 # INTRO
 print("\n\n========= WELCOME TO ROOM CRAWLER (TM) =========\n\n")
-player = Player(input("What is your name, brave adventurer? "), "outside")
-
+playerName = input("What is your name, brave adventurer? ")
+player = Player(playerName, room['outside'])
 # Write a loop that:
 #
 # * Prints the current room name
@@ -58,23 +58,58 @@ active = True
 
 while active is True:
     # Destructuring values
-    current_room = player.current_room[0]
-    print(f"Current location: {current_room}")
-    print(f"Description: {room[current_room].description}\n")
+    
+    current_room = player.current_room
+    print("\n===================================================")
+    print(f"Current location: {current_room.name}")
+    print(f"Description: {current_room.description}")
+    print("===================================================\n\n")
 
-    command = input("\nPlease provide a command to get the adventure started: ")
+    # Get Command
+    command = input("\nPlease provide a direction to move to (n/s/w/e): ")
 
-    if any(dir in command for dir in ("n", "e", "s", "w")):
-        print('test') 
-    #   check if current room has a room in the given direction
-    #       if so, move there
-    #       if not, return an error message
+    # North
+    if command == "n":
+        if player.current_room.n_to:
+            player.current_room = player.current_room.n_to
+            print("\n\n")
+
+        else:
+            print("\n\nThat's not possible!\n\n")
+
+    # South
+    elif command == "s":
+        if player.current_room.s_to:
+            player.current_room = player.current_room.s_to
+            print("\n\n")
+
+        else:
+            print("\n\nThat's not possible!\n\n")
+
+    # East
+    elif command == "e":
+        if player.current_room.e_to:
+            player.current_room = player.current_room.e_to
+            print("\n\n")
+
+        else:
+            print("\n\nThat's not possible!\n\n")
+    
+    # West
+    elif command == "w":
+        if player.current_room.w_to:
+            player.current_room = player.current_room.w_to
+            print("\n\n")
+
+        else:
+            print("\n\nThat's not possible!\n\n")
 
 
     # If command is "q", set active to False and quit loop
     elif command == "q":
         active = False
     
+
     # In case of invalid input, return error
     else:
         print(f"""
