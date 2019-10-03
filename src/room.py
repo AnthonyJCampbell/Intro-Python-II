@@ -11,6 +11,8 @@ class Room:
     self.e_to = None
     self.w_to = None
 
+  def __str__(self):
+    return f"item list: {self.item_list}"
 
 # test = Room("Foyer", "It's big")
 # print(test)
