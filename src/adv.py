@@ -146,7 +146,10 @@ while active is True:
         elif command[0] == "drop" or "d":
             if command[1] in player.inventory:
                 current_room.item_list.append(player.inventory[command[1]])
+                
+                player.inventory[command[1]].on_drop()
                 del player.inventory[command[1]]
+
 
             else: 
                 print(f"You don't have an item called '{command[1]}' in your inventory silly! \n")
