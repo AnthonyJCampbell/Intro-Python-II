@@ -4,21 +4,21 @@ from player import Player
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", ["Ring", "Sword"]),
+                     "North of you, the cave mount beckons", ["ring", "sword"]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", ["Saddle"]),
+passages run north and east.""", ["saddle"]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", ["Rope"]),
+the distance, but there is no way across the chasm.""", ["rope"]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", ["Torch"]),
+to north. The smell of gold permeates the air.""", ["torch"]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", ["Gold"]),
+earlier adventurers. The only exit is to the south.""", ["gold"]),
 }
 
 
@@ -41,7 +41,7 @@ room['treasure'].s_to = room['narrow']
 # INTRO
 print("\n\n========= WELCOME TO ROOM CRAWLER (TM) =========\n\n")
 playerName = input("What is your name, brave adventurer? ")
-player = Player(playerName, room['outside'], [])
+player = Player(playerName, room['outside'], ["sword"])
 # Write a loop that:
 #
 # * Prints the current room name
@@ -67,9 +67,11 @@ while active is True:
     print("===================================================\n\n")
 
     # Get Command
-    command = input("\nPlease provide a direction to move to (n/s/w/e): ")
+    command = input("\nPlease provide a direction to move to (n/s/w/e): ").lower().split(" ")
 
-    if len(command.split(" ")) < 2:
+
+    if len(command) < 2:
+        command = command[0]
         # No spaces in input means it's for directions
         # North
         if command == "n":
@@ -122,8 +124,14 @@ while active is True:
             """)
     
     else:
-        # Case: len(input) > 1
-        print("second")
+        # Case: len(command) > 1
+        if command[0] == "get" or "g" or "taken" or "t":
+            if command[1] in current_room.item_list:
+                player.inventory.append(command[1])
+                current_room.item_list.remove(command[1])
+            else: 
+                print(f"There's no item called '{command[1]}' in the {current_room.name}")
+            # player.inventory.append()
 
 
 
