@@ -127,7 +127,7 @@ while active is True:
     
     else:
         # Case: len(command) > 1
-        if command[0] == "get" or "g" or "take" or "t":
+        if command[0] == "get" or command[0] == "g" or command[0] == "take" or command[0] == "t":
 
             # look at the contents of the current `Room` to see if the item is there.
             if command[1] in items_in_room:
@@ -140,8 +140,17 @@ while active is True:
 
             else: 
                 print(f"There's no item called '{command[1]}' in the {current_room.name}")
-            # player.inventory.append()
+            
+        
+        # Drop item:
+        elif command[0] == "drop" or "d":
+            if command[1] in player.inventory:
+                current_room.item_list.append(player.inventory[command[1]])
+                del player.inventory[command[1]]
 
+            else: 
+                print(f"You don't have an item called '{command[1]}' in your inventory silly! \n")
+                
 
 
 print("\n\nGoodbye!\n\n")
