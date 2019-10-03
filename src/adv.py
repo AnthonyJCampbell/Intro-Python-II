@@ -112,6 +112,12 @@ while active is True:
                 print("\n\nThat's not possible!\n\n")
 
 
+        elif command == "i" or command == "q":
+            print("-- Current Inventory --")
+            for item in player.inventory:
+                print(f"- {player.inventory[item]}")
+
+
         # If command is "q", set active to False and quit loop
         elif command == "q":
             active = False
@@ -134,7 +140,14 @@ while active is True:
                 # If it is there, remove it from the `Room` contents, and add it to the `Player` contents.
 
                 player.inventory[command[1]] = current_room.item_list[0]
-                current_room.item_list.pop()
+                print(current_room.item_list)
+
+                # Currently, this is broken. How do I specify which item I want to remove?
+                for i, item in enumerate(current_room.item_list):
+                    if item.name == command[1]:
+                        del current_room.item_list[i]
+                        break
+
                 
                 player.inventory[command[1]].on_take()
 
