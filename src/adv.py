@@ -140,9 +140,8 @@ while active is True:
                 # If it is there, remove it from the `Room` contents, and add it to the `Player` contents.
 
                 player.inventory[command[1]] = current_room.item_list[0]
-                print(current_room.item_list)
 
-                # Currently, this is broken. How do I specify which item I want to remove?
+                # Find the item whose name matches the command and then remove it from the room.
                 for i, item in enumerate(current_room.item_list):
                     if item.name == command[1]:
                         del current_room.item_list[i]
